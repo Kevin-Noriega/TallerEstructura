@@ -1,76 +1,85 @@
-#include<conio.h>
 #include<iostream>
+#include<conio.h>
 #include<cctype>
 
 using namespace std;
 
-main(){
+int main(){
+	
 	string correo;
-	char OP='S';
-	int i, j, k, x, contarooba=0, contpunto=0;
-	while(OP=='S'){
+	char OP = 'S';
+	int i, k, j, y, contArroba = 0, contPunto = 0, contValido = 0;
+	while(OP == 'S'){
 		system("cls");
-		cout <<"ingrese esa monda: ";
+		cout <<"Ingrese esa mierda de correo: ";
 		cin>>correo;
-		if(correo.size()<=6||correo.size()>=30){
-			cout << "debe tener minimo 6 y maximo 30";
-			OP='N';
+		if(correo.size() <= 6 || correo.size() >= 30){
+			contValido++;
+			OP = 'N';
 		}
-		for(i=0;i<correo.size();i++){
-			if(!(((correo[i]>='A')||correo[i]<='Z')||(correo[i]>='a')||(correo[i]<='z')||correo[i]>='0'||(correo[i]<=9)||(correo[i] == '.' || correo[i] == '@'))){
-				cout <<"Solo se permiten letras, números el punto y la @";
-				OP='N';
+		for(i = 0; i < correo.size(); i++){
+			if(!(((correo[i] >= 'a') || correo[i] <= 'z') || (correo[i] >= 'A') || (correo[i] <= 'Z') || correo[i] >= '0' || (correo[i] <= 9) || (correo[i] == '.' || correo[i] == '@'))){
+				contValido++;
+				OP = 'N';
 			}
 		}
-		for(j=0;j<=correo.size();j++){
-			if(correo[j]=='@'){
-				contarooba++;
+		for(k = 0 ; k <= correo.size(); k++){
+			if(correo[k]=='@'){
+				contArroba++;
 			}
 		}
 		cout << endl;
 		
-		if(contarooba!=1){
-			cout <<"solo se permite un solo @";
+		if(contArroba!=1){
+			contValido++;
 			OP='N';
 		}
 		cout << endl;
-		for(k=0; k<=correo.size();k++){
+		for(j = 0; j <= correo.size(); j++){
 			
-			if(correo[k]=='.'){
-				contpunto++;
-				if(k > 0 && correo[k - 1]== '.'){
+			if(correo[j]=='.'){
+				contPunto++;
+				if(j > 0 && correo[j - 1]== '.'){
 					cout <<endl;
-					cout << "los puntos no pueden estar juntos";
+					contValido++;
 					break;		
 				}
 			}
 		}
-		if(contpunto>2){
-			cout << "solo se permiten maximo dos puntos";
+		if(contPunto>2){
+			contValido++;
 			OP='N';
 		}
 		cout << endl;
-		if(correo[0]=='.'||correo[0]=='@'){
-			cout << "el correo no puede inicar con un punto o un arroba";
+		if(correo[0] == '.' || correo[0] == '@'){
+			contValido++;
 			OP='N';
 			cout << endl;
 		}
 		if(correo[correo.size()-1]=='.'||correo[correo.size()-1]=='@'){
-			cout << "el correo no puede terminar con un punto o un arroba";
+			contValido++;
 			OP='N';
 			cout <<endl;
 		}
 		
-		for(x=0; x<=correo[x]; x++){
-			if(((correo[x]=='@')&&(correo[x-1]=='.'))||((correo[x]=='.')&&(correo[x-1]=='@'))){
-				cout << "erro";
+		for(y = 0; y <= correo[y]; y++){
+			if(((correo[y] == '@') && (correo[y-1] == '.')) || ((correo[y] == '.') && (correo[y-1] == '@'))){
+				contValido++;
 			}
 		}
 		
+		if(contValido == 0){
+			cout<<"\nEl correo es valido";
+		}else{
+			cout<<"\nEl correo es invalido";
+		}
+		
 		do{
-			cout << "\ndesea continuar S/N ";
+			cout << "\nDESEA CONTINUAR S/N";
 			OP=getche();
 			OP=toupper(OP);	
 		}while((OP!='N')&&(OP!='S'));
 	}
+	
+	return 0;
 }
