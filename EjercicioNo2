@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int vd(string cdg) {
+ 
+    if (cdg.length() < 10 || cdg.length() > 14) {
+        return 0;
+    }
+    int cn= 0;
+    for (size_t i = 0; i < cdg.length(); ++i) {
+        if (isdigit(cdg[i])) {
+            cn++;
+        }
+    }
+    if ((cn< 3 )||(cn> 7)) {
+        return 0;
+    }
+    int gn = 0;
+    for (size_t i = 0; i < cdg.length(); ++i) {
+        if (cdg[i] == '-') {
+            gn++;
+        }
+    }
+    if (gn != 1) {
+        return 0;
+    }
+    string sud = cdg.substr(0, cdg.length() - 1);
+    int sm = 0;
+    for (size_t i = 0; i <sud.length(); ++i) {
+        if (isdigit(cdg[i])) {
+            sm += cdg[i] - '0';
+        }
+    }
+
+    int rs = sm % 11;
+    int ud = cdg[cdg.length() - 1] - '0';
+    if (rs == ud) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int main() {
+	system("color f0");
+	system("cls");
+    string cdg;
+    cout << "Ingrese el codigo a validar: ";
+    getline(cin, cdg);
+
+    int rsd = vd(cdg);
+    if (rsd == 1) {
+        cout << "El codigo es valido \n" ;
+    } else {
+        cout << "El codigo es invalido \n" ;
+    }
+
+    return 0;
+}
