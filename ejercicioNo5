@@ -1,3 +1,4 @@
+//ejercicio numero 5 by Kevin >Noriega Pastas
 #include <iostream>
 #include <cstdlib> 
 #include <ctime>   
@@ -13,7 +14,7 @@ void mvec(int vec[],int tam);
 
 int main() {
     int tam;
-    cout << "Ingrese la cantidad de elementos del vector: ";
+    cout << "digite el tamaño del vector: ";
     cin >> tam;
 
     int vec[tam];
@@ -31,7 +32,7 @@ int main() {
         switch (opc) {
             case 1:
                 llenadovec(vec, tam);
-                cout << "Vector llenado con numeros aleatorios." << endl;
+                cout << "Vector con numeros aleatorios.\n";
                 break;
             case 2: {
                 int op;
@@ -41,7 +42,7 @@ int main() {
                     cout << "2. Ordenamiento Insercion" << endl;
                     cout << "3. Ordenamiento Shell" << endl;
                     cout << "4. Ordenamiento QuickSort" << endl;
-                    cout << "5. Volver" << endl;
+                    cout << "5. regresar" << endl;
                     cout << "Ingrese su opcion: ";
                     cin >> op;
 
@@ -65,7 +66,7 @@ int main() {
                         case 5:
                             break;
                         default:
-                            cout << "Opcion invalida. Por favor ingrese una opcion valida." << endl;
+                            cout << "Opcion invalida ingrese una opcion valida." << endl;
                     }
                 } while (op != 5);
                 break;
@@ -77,23 +78,22 @@ int main() {
                 cout << "Saliendo del programa." << endl;
                 break;
             default:
-                cout << "Opcion invalida. Por favor ingrese una opcion valida." << endl;
+                cout << "Opcion invalida ingrese una opcion valida." << endl;
         }
     } while (opc != 4);
 
     return 0;
 }
 void llenadovec(int vec[], int tam) {
-    srand(time(0)); // Inicializar la semilla de rand
+    srand(time(0)); 
     for (int i = 0; i < tam; ++i) {
-        vec[i] = rand() % 500 + 1; // Números aleatorios entre 1 y 500
+        vec[i] = rand() % 500 + 1; 
     }
 }
 void ordB(int vec[], int tam) {
     for (int i = 0; i < tam - 1; ++i) {
         for (int j = 0; j < tam - i - 1; ++j) {
             if (vec[j] > vec[j + 1]) {
-                // Intercambiar elementos si están en el orden incorrecto
                 int temp = vec[j];
                 vec[j] = vec[j + 1];
                 vec[j + 1] = temp;
